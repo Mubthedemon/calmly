@@ -19,30 +19,60 @@
       width: 150px;
       height: 150px;
       background-color: #b1cfc4;
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calmy</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #dbe7e4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.6s ease;
+      font-family: sans-serif;
+    }
+
+    .circle {
+      width: 150px;
+      height: 150px;
+      background-color: #b1cfc4;
       border-radius: 50%;
       cursor: pointer;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.6s ease;
+      transition: background-color 0.6s ease, transform 0.3s ease;
     }
 
     .circle:hover {
       transform: scale(1.05);
     }
+
+    .instructions {
+      position: absolute;
+      top: 20px;
+      font-size: 1rem;
+      color: #5a7870;
+    }
   </style>
 </head>
 <body>
+  <div class="instructions">Click the circle to change colors and play rain ☔</div>
   <div class="circle" onclick="changeScene()"></div>
   <audio id="rainSound" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3" preload="auto"></audio>
 
   <script>
-    const colors = ["#dbe7e4", "#c0d7d2", "#a2c9be", "#8dbab0", "#7aa9a1"];
+    const bgColors = ["#dbe7e4", "#c0d7d2", "#a2c9be", "#8dbab0", "#7aa9a1"];
     const circleColors = ["#b1cfc4", "#9ebeb2", "#8caea3", "#7b9e94", "#6a8e85"];
-    let index = 0;
+    let current = 0;
 
     function changeScene() {
-      index = (index + 1) % colors.length;
-      document.body.style.backgroundColor = colors[index];
-      document.querySelector(".circle").style.backgroundColor = circleColors[index];
+      current = (current + 1) % bgColors.length;
+      document.body.style.backgroundColor = bgColors[current];
+      document.querySelector(".circle").style.backgroundColor = circleColors[current];
       const rainSound = document.getElementById("rainSound");
       rainSound.currentTime = 0;
       rainSound.play();
